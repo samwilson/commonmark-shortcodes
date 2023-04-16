@@ -23,6 +23,8 @@ class ShortcodeRenderer implements NodeRendererInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @suppress PhanUndeclaredMethod
      */
     public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {
