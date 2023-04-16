@@ -30,6 +30,7 @@
         "phpcs": "phpcs",
         "phpunit": "phpunit --no-coverage",
         "test": [
+            "composer validate",
             "@phpcs",
             "@phpunit"
         ]

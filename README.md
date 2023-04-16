@@ -6,7 +6,7 @@ for adding 'shortcodes' to Markdown (i.e. `{lorem ipsum=foobar}`).
 
 ![Packagist Version](https://img.shields.io/packagist/v/samwilson/commonmark-shortcodes)
 ![Packagist License](https://img.shields.io/packagist/l/samwilson/commonmark-shortcodes)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/samwilson/commonmark-shortcodes/CI)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/samwilson/commonmark-shortcodes/ci.yml?branch=main)
 
 ## Installation
 
