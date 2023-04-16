@@ -14,5 +14,7 @@
     <file>tests</file>
 
     <!-- Include full Unleashed Coding Standard -->
-    <rule ref="Unleashed"/>
+    <rule ref="Unleashed">
+        <exclude name="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat.DisallowedShortNullable" />
+    </rule>
 </ruleset>

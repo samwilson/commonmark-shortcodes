@@ -22,7 +22,7 @@ final class ShortcodeBlockStartParser implements BlockStartParserInterface
         $this->shortcodeHandlers = $shortcodeHandlers;
     }
 
-    public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): BlockStart|null
+    public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
     {
         $braceCount = 3;
         foreach (\array_keys($this->shortcodeHandlers) as $code) {

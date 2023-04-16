@@ -52,7 +52,7 @@ class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
         return $this->attrs;
     }
 
-    public function getAttr(string $attr): string|null
+    public function getAttr(string $attr): ?string
     {
         return $this->attrs[$attr] ?? null;
     }
