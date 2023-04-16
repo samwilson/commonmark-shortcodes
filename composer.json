@@ -33,8 +33,8 @@
         "test": [
             "composer validate",
             "@phpcs",
-            "phan",
-            "@phpunit"
+            "@phpunit",
+            "phan"
         ]
     },
     "config": {

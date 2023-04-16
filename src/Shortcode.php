@@ -38,9 +38,8 @@ class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
         $doc->loadHTML('<body ' . $string . ' />');
         $body = $doc->getElementsByTagName('body')->item(0);
         for ($i = 0; $i < $body->attributes->length; ++$i) {
-            $name  = $body->attributes->item($i)->nodeName;
-            $value = $body->attributes->getNamedItem($name)->nodeValue;
-            $this->setAttr($name, $value);
+            $attr = $body->attributes->item($i);
+            $this->setAttr($attr->nodeName, $attr->nodeValue);
         }
     }
 
