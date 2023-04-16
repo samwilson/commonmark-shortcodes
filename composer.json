@@ -1,5 +1,5 @@
 {
-    "name": "samwilson/commonmark-shorcodes",
+    "name": "samwilson/commonmark-shortcodes",
     "description": "Adds shortcodes to Markdown, for the CommonMark package.",
     "type": "commonmark-extension",
     "license": "gpl-3.0-or-later",
