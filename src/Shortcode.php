@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkShortcodes;
 
+use Throwable;
 use DOMDocument;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Node\RawMarkupContainerInterface;
@@ -37,7 +38,7 @@ class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
         $doc = new DOMDocument();
         try {
             $loaded = $doc->loadHTML('<body ' . $string . ' />');
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return;
         }
 
