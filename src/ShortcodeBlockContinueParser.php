@@ -14,9 +14,12 @@ final class ShortcodeBlockContinueParser extends AbstractBlockContinueParser
 {
     private Shortcode $shortcode;
 
-    public function __construct(Shortcode $shortcode)
+    private bool $isClosed;
+
+    public function __construct(Shortcode $shortcode, bool $isClosed)
     {
         $this->shortcode = $shortcode;
+        $this->isClosed  = $isClosed;
     }
 
     public function getBlock(): AbstractBlock
@@ -31,7 +34,7 @@ final class ShortcodeBlockContinueParser extends AbstractBlockContinueParser
 
     public function tryContinue(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): ?BlockContinue
     {
-        if ($cursor->getLine() === '}}}') {
+        if ($this->isClosed || $cursor->getLine() === '}}}') {
             return BlockContinue::finished();
         }
 

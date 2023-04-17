@@ -60,6 +60,24 @@ class ShortcodeExtensionTest extends TestCase
                 ],
                 'output' => "<p>Foo</p>\n[\nbody here]\n<p>baz</p>\n",
             ],
+            'block on one line with no attrs' => [
+                'markdown' => "Foo\n\n{{{bar}}}\n\nbaz",
+                'shortcodes' => [
+                    'bar' => static function (Shortcode $sc) {
+                        return 'TEST';
+                    },
+                ],
+                'output' => "<p>Foo</p>\nTEST\n<p>baz</p>\n",
+            ],
+            'block on one line with attrs' => [
+                'markdown' => "Foo\n\n{{{bar lorem='ip sum'}}}\n\nbaz",
+                'shortcodes' => [
+                    'bar' => static function (Shortcode $sc) {
+                        return $sc->getAttr('lorem');
+                    },
+                ],
+                'output' => "<p>Foo</p>\nip sum\n<p>baz</p>\n",
+            ],
         ];
     }
 }

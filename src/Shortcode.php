@@ -35,7 +35,16 @@ class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
     public function loadAttrsFromString(string $string): void
     {
         $doc = new DOMDocument();
-        $doc->loadHTML('<body ' . $string . ' />');
+        try {
+            $loaded = $doc->loadHTML('<body ' . $string . ' />');
+        } catch (\Throwable $e) {
+            return;
+        }
+
+        if (! $loaded) {
+            return;
+        }
+
         $body = $doc->getElementsByTagName('body')->item(0);
         for ($i = 0; $i < $body->attributes->length; ++$i) {
             $attr = $body->attributes->item($i);
