@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkShortcodes;
 
-use Throwable;
 use DOMDocument;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Node\RawMarkupContainerInterface;
+use Throwable;
 
 class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
 {
