@@ -48,7 +48,7 @@ class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
                 $unnamedIndex++;
             }
 
-            $this->setAttr((string) $name, \str_replace('\\|', '|', $value));
+            $this->setAttr(\trim((string) $name), \str_replace('\\|', '|', \trim($value)));
         }
     }
 

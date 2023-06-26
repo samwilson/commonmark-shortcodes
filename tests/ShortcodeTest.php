@@ -29,7 +29,7 @@ class ShortcodeTest extends TestCase
         return [
             ['x', 'foo', [1 => 'foo']],
             ['x', '', []],
-            ['ref', 'name=Foo|bar', ['name' => 'Foo', 1 => 'bar']],
+            ['ref', 'name = Foo| bar', ['name' => 'Foo', 1 => 'bar']],
             ['lorem', 'x=a\|b', ['x' => 'a|b']],
         ];
     }
