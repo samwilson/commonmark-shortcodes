@@ -46,7 +46,7 @@ class ShortcodeExtensionTest extends TestCase
                 'output' => "<p>Foo \nBAR baz \nBIF</p>\n",
             ],
             'simple-inline-params' => [
-                'markdown' => 'Foo {bar a b=c d="e f"} baz',
+                'markdown' => 'Foo {bar |a |b=c|d=e f} baz',
                 'shortcodes' => [
                     'bar' => static function (Shortcode $sc) {
                         return $sc->getAttr('d') . $sc->getAttr('b');
@@ -55,7 +55,7 @@ class ShortcodeExtensionTest extends TestCase
                 'output' => "<p>Foo \ne fc baz</p>\n",
             ],
             'simple-block' => [
-                'markdown' => "Foo\n{{{bar attr=foo\nbody here\n}}}\nbaz",
+                'markdown' => "Foo\n{{{bar | attr=foo\nbody here\n}}}\nbaz",
                 'shortcodes' => [
                     'bar' => static function (Shortcode $sc) {
                         return '[' . $sc->getBody() . ']';
@@ -73,7 +73,7 @@ class ShortcodeExtensionTest extends TestCase
                 'output' => "<p>Foo</p>\nTEST\n<p>baz</p>\n",
             ],
             'block on one line with attrs' => [
-                'markdown' => "Foo\n\n{{{bar lorem='ip sum'}}}\n\nbaz",
+                'markdown' => "Foo\n\n{{{bar|lorem=ip sum}}}\n\nbaz",
                 'shortcodes' => [
                     'bar' => static function (Shortcode $sc) {
                         return $sc->getAttr('lorem');

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkShortcodes;
 
-use DOMDocument;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Node\RawMarkupContainerInterface;
-use Throwable;
 
 class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
 {
@@ -35,21 +33,22 @@ class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
 
     public function loadAttrsFromString(string $string): void
     {
-        $doc = new DOMDocument();
-        try {
-            $loaded = $doc->loadHTML('<body ' . $string . ' />');
-        } catch (Throwable $e) {
-            return;
-        }
+        $parts        = \preg_split('/(?<!\\\\)\\|/', $string);
+        $unnamedIndex = 1;
+        foreach ($parts as $part) {
+            if ($part === '') {
+                continue;
+            }
 
-        if (! $loaded) {
-            return;
-        }
+            if (\strpos($part, '=')) {
+                [$name, $value] = \explode('=', $part);
+            } else {
+                $name  = $unnamedIndex;
+                $value = $part;
+                $unnamedIndex++;
+            }
 
-        $body = $doc->getElementsByTagName('body')->item(0);
-        for ($i = 0; $i < $body->attributes->length; ++$i) {
-            $attr = $body->attributes->item($i);
-            $this->setAttr($attr->nodeName, $attr->nodeValue);
+            $this->setAttr((string) $name, \str_replace('\\|', '|', $value));
         }
     }
 
