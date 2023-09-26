@@ -26,7 +26,7 @@ final class ShortcodeBlockStartParser implements BlockStartParserInterface
     {
         $braceCount = 3;
         foreach (\array_keys($this->shortcodeHandlers) as $code) {
-            $pattern = '/^\{{' . $braceCount . '}' . \preg_quote($code) . '([^ \}]?)(\}{' . $braceCount . '})?/';
+            $pattern = '/^\{{' . $braceCount . '}' . \preg_quote($code) . '([^ \}]?)(\}{' . $braceCount . '})?\s*/';
             $opening = $cursor->match($pattern);
             if ($opening === null) {
                 continue;
@@ -34,8 +34,8 @@ final class ShortcodeBlockStartParser implements BlockStartParserInterface
 
             $shortcode = new Shortcode($code);
             // If the block is closed on the same line as the attributes, strip the trailing braces.
-            $attrsString = \substr($cursor->getLine(), \strlen($code) + $braceCount);
-            $isClosed    = \substr($attrsString, -$braceCount) === '}}}';
+            $attrsString = \substr(\trim($cursor->getLine()), \strlen($code) + $braceCount);
+            $isClosed    = \substr($attrsString, -$braceCount) === \str_repeat('}', $braceCount);
             if ($isClosed) {
                 $attrsString = \substr($attrsString, 0, -$braceCount);
             }
