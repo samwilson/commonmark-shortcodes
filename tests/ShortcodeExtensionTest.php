@@ -63,6 +63,15 @@ class ShortcodeExtensionTest extends TestCase
                 ],
                 'output' => "<p>Foo</p>\n[\nbody here]\n<p>baz</p>\n",
             ],
+            'block on one line with trailing space' => [
+                'markdown' => "Foo\n{{{bar|a=b}}} \n",
+                'shortcodes' => [
+                    'bar' => static function (Shortcode $sc) {
+                        return '[' . $sc->getAttr('a') . ']';
+                    },
+                ],
+                'output' => "<p>Foo</p>\n[b]\n",
+            ],
             'block on one line with no attrs' => [
                 'markdown' => "Foo\n\n{{{bar}}}\n\nbaz",
                 'shortcodes' => [
