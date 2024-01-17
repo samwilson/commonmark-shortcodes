@@ -5,20 +5,21 @@ require dirname( __DIR__ ) . '/vendor/autoload.php';
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
-use Samwilson\CommonMarkShortcodes\Shortcode;
+use Samwilson\CommonMarkShortcodes\ShortcodeBlock;
 use Samwilson\CommonMarkShortcodes\ShortcodeExtension;
+use Samwilson\CommonMarkShortcodes\ShortcodeInline;
 
 $environment = new Environment([
     'shortcodes' => [
         'shortcodes' => [
-            'inline-shortcode' => function ( Shortcode $shortcode ) {
+            'inline-shortcode' => function ( ShortcodeInline $shortcode ) {
                 return 'Inline shortcode (with ' . count( $shortcode->getAttrs() ) . ' params)';
             },
-            'block-shortcode' => function ( Shortcode $shortcode ) {
+            'block-shortcode' => function ( ShortcodeBlock $shortcode ) {
                 return 'Block-level shortcode (with ' . count( $shortcode->getAttrs() ) . ' params):'
                     .'<pre>' . $shortcode->getBody() . '</pre>';
             },
-            'quote' => function ( Shortcode $shortcode ) {
+            'quote' => function ( ShortcodeBlock $shortcode ) {
                 return '<blockquote>' . $shortcode->getBody() . '<cite>' . $shortcode->getAttr('cite') . '</cite></blockquote>';
             },
         ],
@@ -37,8 +38,15 @@ more
 }}}
 
 Postipsum.
-
-{{{quote|cite='Example'
-Lorem ipsum.
-}}}
 ")->getContent();
+
+/* Output:
+
+<p><em>Markdown</em> content with Inline shortcode (with 3 params) and…</p>
+Block-level shortcode (with 3 params):<pre>
+Lorem ipsum content.
+
+more</pre>
+<p>Postipsum.</p>
+
+*/
