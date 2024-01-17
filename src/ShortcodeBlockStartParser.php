@@ -32,7 +32,7 @@ final class ShortcodeBlockStartParser implements BlockStartParserInterface
                 continue;
             }
 
-            $shortcode = new Shortcode($code);
+            $shortcode = new ShortcodeBlock($code);
             // If the block is closed on the same line as the attributes, strip the trailing braces.
             $attrsString = \substr(\trim($cursor->getLine()), \strlen($code) + $braceCount);
             $isClosed    = \substr($attrsString, -$braceCount) === \str_repeat('}', $braceCount);

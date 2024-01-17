@@ -8,8 +8,9 @@ use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
 use PHPUnit\Framework\TestCase;
-use Samwilson\CommonMarkShortcodes\Shortcode;
+use Samwilson\CommonMarkShortcodes\ShortcodeBlock;
 use Samwilson\CommonMarkShortcodes\ShortcodeExtension;
+use Samwilson\CommonMarkShortcodes\ShortcodeInline;
 
 class ShortcodeExtensionTest extends TestCase
 {
@@ -43,21 +44,21 @@ class ShortcodeExtensionTest extends TestCase
                         return 'BIF';
                     },
                 ],
-                'output' => "<p>Foo \nBAR baz \nBIF</p>\n",
+                'output' => "<p>Foo BAR baz BIF</p>\n",
             ],
             'simple-inline-params' => [
                 'markdown' => 'Foo {bar |a |b=c|d=e f} baz',
                 'shortcodes' => [
-                    'bar' => static function (Shortcode $sc) {
+                    'bar' => static function (ShortcodeInline $sc) {
                         return $sc->getAttr('d') . $sc->getAttr('b');
                     },
                 ],
-                'output' => "<p>Foo \ne fc baz</p>\n",
+                'output' => "<p>Foo e fc baz</p>\n",
             ],
             'simple-block' => [
                 'markdown' => "Foo\n{{{bar | attr=foo\nbody here\n}}}\nbaz",
                 'shortcodes' => [
-                    'bar' => static function (Shortcode $sc) {
+                    'bar' => static function (ShortcodeBlock $sc) {
                         return '[' . $sc->getBody() . ']';
                     },
                 ],
@@ -66,7 +67,7 @@ class ShortcodeExtensionTest extends TestCase
             'block on one line with trailing space' => [
                 'markdown' => "Foo\n{{{bar|a=b}}} \n",
                 'shortcodes' => [
-                    'bar' => static function (Shortcode $sc) {
+                    'bar' => static function (ShortcodeBlock $sc) {
                         return '[' . $sc->getAttr('a') . ']';
                     },
                 ],
@@ -75,7 +76,7 @@ class ShortcodeExtensionTest extends TestCase
             'block on one line with no attrs' => [
                 'markdown' => "Foo\n\n{{{bar}}}\n\nbaz",
                 'shortcodes' => [
-                    'bar' => static function (Shortcode $sc) {
+                    'bar' => static function () {
                         return 'TEST';
                     },
                 ],
@@ -84,11 +85,20 @@ class ShortcodeExtensionTest extends TestCase
             'block on one line with attrs' => [
                 'markdown' => "Foo\n\n{{{bar|lorem=ip sum}}}\n\nbaz",
                 'shortcodes' => [
-                    'bar' => static function (Shortcode $sc) {
+                    'bar' => static function (ShortcodeBlock $sc) {
                         return $sc->getAttr('lorem');
                     },
                 ],
                 'output' => "<p>Foo</p>\nip sum\n<p>baz</p>\n",
+            ],
+            'block with only inline and recursive parse' => [
+                'markdown' => 'An *inline {bar}* with shortcode',
+                'shortcodes' => [
+                    'bar' => static function () {
+                        return 'BAR';
+                    },
+                ],
+                'output' => "<p>An <em>inline BAR</em> with shortcode</p>\n",
             ],
         ];
     }
