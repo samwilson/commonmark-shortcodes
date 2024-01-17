@@ -24,6 +24,7 @@ class ShortcodeExtension implements ConfigurableExtensionInterface
         $environment
             ->addInlineParser(new ShortcodeInlineParser($shortcodes), 50)
             ->addBlockStartParser(new ShortcodeBlockStartParser($shortcodes), 50)
-            ->addRenderer(Shortcode::class, new ShortcodeRenderer($shortcodes), 0);
+            ->addRenderer(ShortcodeInline::class, new ShortcodeRenderer($shortcodes), 0)
+            ->addRenderer(ShortcodeBlock::class, new ShortcodeRenderer($shortcodes), 0);
     }
 }

@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkShortcodes;
 
-use League\CommonMark\Node\Block\AbstractBlock;
-use League\CommonMark\Node\RawMarkupContainerInterface;
-
-class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
+trait Shortcode
 {
     private string $name;
 
     /** @var string[] */
     private array $attrs = [];
-
-    private string $body = '';
 
     public function __construct(string $name)
     {
@@ -68,16 +63,6 @@ class Shortcode extends AbstractBlock implements RawMarkupContainerInterface
     public function setAttr(string $key, string $value): void
     {
         $this->attrs[$key] = $value;
-    }
-
-    public function addToBody(string $line): void
-    {
-        $this->body .= "\n" . $line;
-    }
-
-    public function getBody(): string
-    {
-        return $this->body;
     }
 
     /**

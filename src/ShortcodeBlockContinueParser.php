@@ -12,11 +12,11 @@ use League\CommonMark\Parser\Cursor;
 
 final class ShortcodeBlockContinueParser extends AbstractBlockContinueParser
 {
-    private Shortcode $shortcode;
+    private ShortcodeBlock $shortcode;
 
     private bool $isClosed;
 
-    public function __construct(Shortcode $shortcode, bool $isClosed)
+    public function __construct(ShortcodeBlock $shortcode, bool $isClosed)
     {
         $this->shortcode = $shortcode;
         $this->isClosed  = $isClosed;

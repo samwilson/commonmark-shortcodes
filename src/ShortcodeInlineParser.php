@@ -14,7 +14,7 @@ final class ShortcodeInlineParser implements InlineParserInterface
     private array $shortcodes;
 
     /**
-     * @param Shortcode[] $shortcodes
+     * @param ShortcodeInline[] $shortcodes
      */
     public function __construct(array $shortcodes)
     {
@@ -33,7 +33,7 @@ final class ShortcodeInlineParser implements InlineParserInterface
 
     public function parse(InlineParserContext $inlineContext): bool
     {
-        $shortcode = new Shortcode($inlineContext->getMatches()[2]);
+        $shortcode = new ShortcodeInline($inlineContext->getMatches()[2]);
         $shortcode->loadAttrsFromString($inlineContext->getMatches()[3]);
         $inlineContext->getCursor()->advanceBy($inlineContext->getFullMatchLength());
         $inlineContext->getContainer()->appendChild($shortcode);
