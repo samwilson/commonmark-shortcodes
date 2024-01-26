@@ -10,6 +10,7 @@
     <arg value="nps"/>
 
     <!-- Directories to be checked -->
+    <file>examples</file>
     <file>src</file>
     <file>tests</file>
 

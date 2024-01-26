@@ -75,8 +75,7 @@ echo $converter->convert('Markdown *goes here*.')->getContent();
 ```
 
 The callbacks are where you define your shortcodes' output.
-Each takes a single parameter,
-either a `ShortcodeInline` or `ShortcodeBlock` object,
+Each takes a single parameter (a `Shortcode` object)
 and returns a string that will be inserted into the output in place of the shortcode.
 
 For example, Markdown like this:
@@ -89,7 +88,7 @@ could be paired with the following shortcode configuration:
 
 ```php
 [
-    'smallcaps' => function (ShortcodeInline $shortcode) {
+    'smallcaps' => function (Shortcode $shortcode) {
         return '<span style="font-variant:small-caps">'
             . $shortcode->getAttr(1)
             . '</span>';
