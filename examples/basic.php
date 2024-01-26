@@ -5,21 +5,20 @@ require dirname( __DIR__ ) . '/vendor/autoload.php';
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
-use Samwilson\CommonMarkShortcodes\ShortcodeBlock;
+use Samwilson\CommonMarkShortcodes\Shortcode;
 use Samwilson\CommonMarkShortcodes\ShortcodeExtension;
-use Samwilson\CommonMarkShortcodes\ShortcodeInline;
 
 $environment = new Environment([
     'shortcodes' => [
         'shortcodes' => [
-            'inline-shortcode' => function ( ShortcodeInline $shortcode ) {
+            'inline-shortcode' => function ( Shortcode $shortcode ) {
                 return 'Inline shortcode (with ' . count( $shortcode->getAttrs() ) . ' params)';
             },
-            'block-shortcode' => function ( ShortcodeBlock $shortcode ) {
+            'block-shortcode' => function ( Shortcode $shortcode ) {
                 return 'Block-level shortcode (with ' . count( $shortcode->getAttrs() ) . ' params):'
                     .'<pre>' . $shortcode->getBody() . '</pre>';
             },
-            'quote' => function ( ShortcodeBlock $shortcode ) {
+            'quote' => function ( Shortcode $shortcode ) {
                 return '<blockquote>' . $shortcode->getBody() . '<cite>' . $shortcode->getAttr('cite') . '</cite></blockquote>';
             },
         ],
