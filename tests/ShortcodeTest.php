@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Samwilson\CommonMarkShortcodes\Test;
 
 use PHPUnit\Framework\TestCase;
-use Samwilson\CommonMarkShortcodes\ShortcodeBlock;
+use Samwilson\CommonMarkShortcodes\Shortcode;
 
 class ShortcodeTest extends TestCase
 {
@@ -16,7 +16,7 @@ class ShortcodeTest extends TestCase
      */
     public function testLoadAttrsFromString(string $name, string $string, array $expected): void
     {
-        $shortcode = new ShortcodeBlock($name);
+        $shortcode = new Shortcode($name);
         $shortcode->loadAttrsFromString($string);
         $this->assertSame($expected, $shortcode->getAttrs());
     }

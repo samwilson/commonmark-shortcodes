@@ -38,7 +38,7 @@ final class ShortcodeBlockContinueParser extends AbstractBlockContinueParser
             return BlockContinue::finished();
         }
 
-        $this->shortcode->addToBody($cursor->getLine());
+        $this->shortcode->getShortcode()->addToBody($cursor->getLine());
 
         return BlockContinue::at($cursor);
     }

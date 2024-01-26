@@ -9,17 +9,5 @@ use League\CommonMark\Node\RawMarkupContainerInterface;
 
 class ShortcodeBlock extends AbstractBlock implements RawMarkupContainerInterface
 {
-    use Shortcode;
-
-    private string $body = '';
-
-    public function addToBody(string $line): void
-    {
-        $this->body .= "\n" . $line;
-    }
-
-    public function getBody(): string
-    {
-        return $this->body;
-    }
+    use ShortcodeNode;
 }

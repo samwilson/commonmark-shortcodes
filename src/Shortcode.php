@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Samwilson\CommonMarkShortcodes;
 
-trait Shortcode
+class Shortcode
 {
     private string $name;
 
     /** @var string[] */
     private array $attrs = [];
+
+    private string $body = '';
 
     public function __construct(string $name)
     {
@@ -65,18 +67,13 @@ trait Shortcode
         $this->attrs[$key] = $value;
     }
 
-    /**
-     * Not used.
-     */
-    public function getLiteral(): string
+    public function addToBody(string $line): void
     {
-        return '';
+        $this->body .= "\n" . $line;
     }
 
-    /**
-     * Not used.
-     */
-    public function setLiteral(string $literal): void
+    public function getBody(): string
     {
+        return $this->body;
     }
 }

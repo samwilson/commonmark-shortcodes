@@ -9,5 +9,5 @@ use League\CommonMark\Node\RawMarkupContainerInterface;
 
 class ShortcodeInline extends AbstractInline implements RawMarkupContainerInterface
 {
-    use Shortcode;
+    use ShortcodeNode;
 }

@@ -8,9 +8,8 @@ use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
 use PHPUnit\Framework\TestCase;
-use Samwilson\CommonMarkShortcodes\ShortcodeBlock;
+use Samwilson\CommonMarkShortcodes\Shortcode;
 use Samwilson\CommonMarkShortcodes\ShortcodeExtension;
-use Samwilson\CommonMarkShortcodes\ShortcodeInline;
 
 class ShortcodeExtensionTest extends TestCase
 {
@@ -49,7 +48,7 @@ class ShortcodeExtensionTest extends TestCase
             'simple-inline-params' => [
                 'markdown' => 'Foo {bar |a |b=c|d=e f} baz',
                 'shortcodes' => [
-                    'bar' => static function (ShortcodeInline $sc) {
+                    'bar' => static function (Shortcode $sc) {
                         return $sc->getAttr('d') . $sc->getAttr('b');
                     },
                 ],
@@ -58,7 +57,7 @@ class ShortcodeExtensionTest extends TestCase
             'simple-block' => [
                 'markdown' => "Foo\n{{{bar | attr=foo\nbody here\n}}}\nbaz",
                 'shortcodes' => [
-                    'bar' => static function (ShortcodeBlock $sc) {
+                    'bar' => static function (Shortcode $sc) {
                         return '[' . $sc->getBody() . ']';
                     },
                 ],
@@ -67,7 +66,7 @@ class ShortcodeExtensionTest extends TestCase
             'block on one line with trailing space' => [
                 'markdown' => "Foo\n{{{bar|a=b}}} \n",
                 'shortcodes' => [
-                    'bar' => static function (ShortcodeBlock $sc) {
+                    'bar' => static function (Shortcode $sc) {
                         return '[' . $sc->getAttr('a') . ']';
                     },
                 ],
@@ -85,7 +84,7 @@ class ShortcodeExtensionTest extends TestCase
             'block on one line with attrs' => [
                 'markdown' => "Foo\n\n{{{bar|lorem=ip sum}}}\n\nbaz",
                 'shortcodes' => [
-                    'bar' => static function (ShortcodeBlock $sc) {
+                    'bar' => static function (Shortcode $sc) {
                         return $sc->getAttr('lorem');
                     },
                 ],

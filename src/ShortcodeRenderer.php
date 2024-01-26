@@ -33,10 +33,12 @@ class ShortcodeRenderer implements NodeRendererInterface
             throw new InvalidArgumentException('Incompatible node type');
         }
 
-        if (! isset($this->shortcodeHandlers[$node->getName()])) {
-            return "[Error: shortcode '" . $node->getName() . "' not found.]";
+        $shortcode = $node->getShortcode();
+
+        if (! isset($this->shortcodeHandlers[$shortcode->getName()])) {
+            return "[Error: shortcode '" . $shortcode->getName() . "' not found.]";
         }
 
-        return $this->shortcodeHandlers[$node->getName()]($node);
+        return $this->shortcodeHandlers[$shortcode->getName()]($shortcode);
     }
 }
