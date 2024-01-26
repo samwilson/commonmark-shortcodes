@@ -1,6 +1,8 @@
 <?php
 
-require dirname( __DIR__ ) . '/vendor/autoload.php';
+declare(strict_types=1);
+
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -11,14 +13,14 @@ use Samwilson\CommonMarkShortcodes\ShortcodeExtension;
 $environment = new Environment([
     'shortcodes' => [
         'shortcodes' => [
-            'inline-shortcode' => function ( Shortcode $shortcode ) {
-                return 'Inline shortcode (with ' . count( $shortcode->getAttrs() ) . ' params)';
+            'inline-shortcode' => static function (Shortcode $shortcode) {
+                return 'Inline shortcode (with ' . count($shortcode->getAttrs()) . ' params)';
             },
-            'block-shortcode' => function ( Shortcode $shortcode ) {
-                return 'Block-level shortcode (with ' . count( $shortcode->getAttrs() ) . ' params):'
-                    .'<pre>' . $shortcode->getBody() . '</pre>';
+            'block-shortcode' => static function (Shortcode $shortcode) {
+                return 'Block-level shortcode (with ' . count($shortcode->getAttrs()) . ' params):'
+                    . '<pre>' . $shortcode->getBody() . '</pre>';
             },
-            'quote' => function ( Shortcode $shortcode ) {
+            'quote' => static function (Shortcode $shortcode) {
                 return '<blockquote>' . $shortcode->getBody() . '<cite>' . $shortcode->getAttr('cite') . '</cite></blockquote>';
             },
         ],
