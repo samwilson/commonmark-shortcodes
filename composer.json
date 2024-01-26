@@ -12,7 +12,6 @@
         "league/commonmark": "^2"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.41",
         "phan/phan": "^5.4",
         "phpunit/phpunit": "^9.5",
         "symfony/var-dumper": "^5.4",
@@ -30,8 +29,7 @@
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "ergebnis/composer-normalize": true
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "scripts": {
@@ -39,7 +37,6 @@
         "phpunit": "phpunit --no-coverage",
         "test": [
             "composer validate",
-            "composer normalize --dry-run",
             "@phpcs",
             "@phpunit",
             "@php examples/basic.php",
