@@ -34,12 +34,12 @@ class ShortcodeExtensionTest extends TestCase
     {
         return [
             'simple-inline' => [
-                'markdown' => 'Foo {bar} baz {bif}',
+                'markdown' => 'Foo {bar} baz {barbif}',
                 'shortcodes' => [
                     'bar' => static function () {
                         return 'BAR';
                     },
-                    'bif' => static function () {
+                    'barbif' => static function () {
                         return 'BIF';
                     },
                 ],
