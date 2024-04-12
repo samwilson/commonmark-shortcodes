@@ -23,9 +23,15 @@ final class ShortcodeInlineParser implements InlineParserInterface
 
     public function getMatchDefinition(): InlineParserMatch
     {
+        // Sort shortcodes by length, so they match from longest to shortest in the regex.
+        $sortedShortcodeNames = \array_keys($this->shortcodes);
+        \usort($sortedShortcodeNames, static function ($a, $b) {
+            return \strlen($b) - \strlen($a);
+        });
+
         return InlineParserMatch::join(
             InlineParserMatch::string('{'),
-            InlineParserMatch::oneOf(...\array_keys($this->shortcodes)),
+            InlineParserMatch::oneOf(...$sortedShortcodeNames),
             InlineParserMatch::regex('.*?'),
             InlineParserMatch::string('}')
         );
