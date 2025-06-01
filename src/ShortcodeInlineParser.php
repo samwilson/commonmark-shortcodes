@@ -32,7 +32,8 @@ final class ShortcodeInlineParser implements InlineParserInterface
         return InlineParserMatch::join(
             InlineParserMatch::string('{'),
             InlineParserMatch::oneOf(...$sortedShortcodeNames),
-            InlineParserMatch::regex('.*?'),
+            // Match either two backslashes, a backslash-brace, or anything that's not a brace.
+            InlineParserMatch::regex('(?:\\\\\\\\|\\\\}|[^}])*'),
             InlineParserMatch::string('}')
         );
     }

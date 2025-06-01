@@ -54,6 +54,15 @@ class ShortcodeExtensionTest extends TestCase
                 ],
                 'output' => "<p>Foo e fc baz</p>\n",
             ],
+            'inline-escape-chars' => [
+                'markdown' => 'outer {one| inner1 {two\|inner2\}}',
+                'shortcodes' => [
+                    'one' => static function (Shortcode $sc) {
+                        return '[ONE ' . $sc->getAttr('1') . ']';
+                    },
+                ],
+                'output' => "<p>outer [ONE inner1 {two|inner2}]</p>\n",
+            ],
             'simple-block' => [
                 'markdown' => "Foo\n{{{bar | attr=foo\nbody here\n}}}\nbaz",
                 'shortcodes' => [
