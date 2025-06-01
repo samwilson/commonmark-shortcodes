@@ -45,7 +45,9 @@ class Shortcode
                 $unnamedIndex++;
             }
 
-            $this->setAttr(\trim((string) $name), \str_replace('\\|', '|', \trim($value)));
+            $unescapedClosingBrace = \str_replace('\\}', '}', \trim($value));
+            $unescapedPipes        = \str_replace('\\|', '|', $unescapedClosingBrace);
+            $this->setAttr(\trim((string) $name), $unescapedPipes);
         }
     }
 
