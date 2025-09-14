@@ -38,7 +38,11 @@ Lorem ipsum content.
 more
 }}}
 
-Postipsum.
+Postipsum with a multiline {inline-shortcode
+|foo
+|bar=''
+|baz=3
+} that should work.
 ")->getContent();
 
 /* Output:

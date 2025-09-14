@@ -54,6 +54,15 @@ class ShortcodeExtensionTest extends TestCase
                 ],
                 'output' => "<p>Foo e fc baz</p>\n",
             ],
+            'inline-with-linebreaks' => [
+                'markdown' => "Foo {bar\n|name=Douglas\n|id=Q42\n} baz",
+                'shortcodes' => [
+                    'bar' => static function (Shortcode $sc) {
+                        return '--' . $sc->getAttr('name') . '--';
+                    },
+                ],
+                'output' => "<p>Foo --Douglas-- baz</p>\n",
+            ],
             'inline-escape-chars' => [
                 'markdown' => 'outer {one| inner1 {two\|inner2\}}',
                 'shortcodes' => [
