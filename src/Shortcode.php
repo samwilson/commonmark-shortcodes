@@ -30,7 +30,11 @@ class Shortcode
 
     public function loadAttrsFromString(string $string): void
     {
-        $parts        = \preg_split('/(?<!\\\\)\\|/', $string);
+        $parts = \preg_split('/(?<!\\\\)\\|/', $string);
+        if (! $parts) {
+            return;
+        }
+
         $unnamedIndex = 1;
         foreach ($parts as $part) {
             if ($part === '') {
