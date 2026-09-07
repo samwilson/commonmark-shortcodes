@@ -12,9 +12,9 @@
         "league/commonmark": "^2"
     },
     "require-dev": {
-        "phan/phan": "^5.4",
+        "phan/phan": "^6",
         "phpunit/phpunit": "^9.5",
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^2",
         "symfony/var-dumper": "^5.4",
         "unleashedtech/php-coding-standard": "^3.1"
     },
@@ -41,7 +41,7 @@
             "@phpcs",
             "@phpunit",
             "@php examples/basic.php",
-            "phan",
+            "phan --allow-polyfill-parser",
             "phpstan analyse --level=8 src/ tests/"
         ]
     }
