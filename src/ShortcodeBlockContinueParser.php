@@ -32,7 +32,7 @@ final class ShortcodeBlockContinueParser extends AbstractBlockContinueParser
         return true;
     }
 
-    public function tryContinue(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): ?BlockContinue
+    public function tryContinue(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): BlockContinue
     {
         if ($this->isClosed || $cursor->getLine() === '}}}') {
             return BlockContinue::finished();
