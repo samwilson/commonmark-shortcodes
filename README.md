@@ -7,6 +7,7 @@ for adding 'shortcodes' to Markdown.
 ![Packagist Version](https://img.shields.io/packagist/v/samwilson/commonmark-shortcodes)
 ![Packagist License](https://img.shields.io/packagist/l/samwilson/commonmark-shortcodes)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/samwilson/commonmark-shortcodes/ci.yml?branch=main)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samwilson/commonmark-shortcodes/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/samwilson/commonmark-shortcodes/?branch=main)
 
 Shortcodes are bits of text in a Markdown document
 that are delimited with one or three braces
