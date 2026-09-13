@@ -10,19 +10,21 @@ for adding 'shortcodes' to Markdown.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/samwilson/commonmark-shortcodes/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/samwilson/commonmark-shortcodes/?branch=main)
 
 Shortcodes are bits of text in a Markdown document
-that are delimited with one or three braces
+that are delimited with either one or three curly braces
 and are replaced with whatever content is needed.
 There are two types of shortcode, inline and block
 (the same name cannot be used for both an inline and block shortcode;
 i.e. you must decide when designing the shortcodes how each is to be used).
 
-Inline shortcodes have one brace, `{name|attr=val}`, and appear within a paragraph or list item etc. For example, here `cite` is the name of the shortcode and it's got one attribute:
+Inline shortcodes have one curly brace, `{name|attr=val}`, and appear within a paragraph or list item etc.
+For example, here `cite` is the name of the shortcode and it's got one attribute:
 
 ```
 There are over 300 distinct breeds{cite|Kris2008} of goat.
 ```
 
-Block shortcodes have three braces, `{{{name|attr=val}}}`, and an optional body;
+Block shortcodes have three curly braces, `{{{name|attr=val}}}`,
+and an optional body that starts on the line after the opening of the shortcode;
 their attributes are the same as for inline shortcodes.
 Here `quotation` is the shortcode, it's got one attribute, and a two-line body:
 
@@ -47,7 +49,7 @@ about how to set up the CommonMark environment.
 
 Install with [Composer](https://getcomposer.org/):
 
-```
+```shell
 $ composer require samwilson/commonmark-shortcodes
 ```
 
@@ -81,7 +83,7 @@ and returns a string that will be inserted into the output in place of the short
 
 For example, Markdown like this:
 
-```
+```markdown
 Lorem {smallcaps|ipsum}.
 ```
 
@@ -89,7 +91,7 @@ could be paired with the following shortcode configuration:
 
 ```php
 [
-    'smallcaps' => function (Shortcode $shortcode) {
+    'smallcaps' => static function (Shortcode $shortcode) {
         return '<span style="font-variant:small-caps">'
             . $shortcode->getAttr(1)
             . '</span>';

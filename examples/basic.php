@@ -52,6 +52,6 @@ Block-level shortcode (with 3 params):<pre>
 Lorem ipsum content.
 
 more</pre>
-<p>Postipsum.</p>
+<p>Postipsum with a multiline Inline shortcode (with 4 params) that should work.</p>
 
 */
